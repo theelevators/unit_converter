@@ -1,7 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use elevated_pies::{ Unit, Measurement };
+use elevated_pies::{ Distance, Measurement };
 fn main() {
     tauri::Builder
         ::default()
@@ -13,7 +13,7 @@ fn main() {
 #[tauri::command]
 fn convert_unit(num: String, from_uom: String, to_uom: String) -> String {
     let dim: f32 = num.trim().parse().unwrap_or_default();
-    let unit: Result<Unit, &str> = Unit::new(dim, &from_uom);
+    let unit: Result<Distance, &str> = Distance::new(dim, &from_uom);
 
     match unit {
         Ok(value) => {
