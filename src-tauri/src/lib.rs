@@ -164,9 +164,9 @@ impl Volume {
             "teaspoon" => Ok(Volume::Teaspoon(num)),
             "liter" => Ok(Volume::Liter(num)),
             "milliliter"=> Ok(Volume::Milliliter(num)),
-            "cubimeter" => Ok(Volume::CubicMeter(num)),
-            "cubicfoot" => Ok(Volume::CubicFoot(num)),
-            "cubicinch" => Ok(Volume::CubitInch(num)),
+            "cubic meter" => Ok(Volume::CubicMeter(num)),
+            "cubic foot" => Ok(Volume::CubicFoot(num)),
+            "cubic inch" => Ok(Volume::CubitInch(num)),
             _ => Err("Invalid Volume"),
         }
     }
@@ -292,7 +292,7 @@ impl Volume {
     pub fn to_liter<'a>(self) -> f32 {
         match self {
             Volume::Gallon(value) => value.clone() / 3.785,
-            Volume::Quart(value) => value.clone()/ 1.057,
+            Volume::Quart(value) => value.clone()* 1.057,
             Volume::Pint(value) => value.clone()/ 2.113,
             Volume::Cup(value) => value.clone() / 4.167,
             Volume::Ounce(value) => value.clone() / 33.814,

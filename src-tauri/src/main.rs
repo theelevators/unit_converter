@@ -5,7 +5,7 @@ use elevated_pies::{ Distance, Volume};
 fn main() {
     tauri::Builder
         ::default()
-        .invoke_handler(tauri::generate_handler![convert_distance])
+        .invoke_handler(tauri::generate_handler![convert_distance,convert_volume])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

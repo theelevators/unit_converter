@@ -1,5 +1,6 @@
 <script>
   import { invoke } from "@tauri-apps/api";
+  let uomSelection;
   let leftSelection;
   let rightSelection;
   let left = 0;
@@ -10,8 +11,7 @@
     { id: 2, text: `Volume` },
   ];
 
-
-  let ditances = [
+  let distances = [
     { id: 1, text: `Inch` },
     { id: 2, text: `Milimeter` },
     { id: 3, text: `Centimeter` },
@@ -33,16 +33,16 @@
     { id: 8, text: `Milliliter` },
     { id: 8, text: `Cubic Meter` },
     { id: 8, text: `Cubic Foot` },
-    { id: 8, text: `Cubit Inch` },
-
-
+    { id: 8, text: `Cubic Inch` },
   ];
+
+  let units = [...distances];
 
   let handleRightUnit = async (e) => {
     let entry = e.target.value;
     right = entry;
-
-    const res = await invoke("convert_distance", {
+    let fun =  uomSelection.text == "Distance" ? "convert_distance" : "convert_volume"
+    const res = await invoke(fun, {
       num: right,
       fromUom: rightSelection.text,
       toUom: leftSelection.text,
@@ -53,8 +53,34 @@
     left = res;
   };
 
-  let handleUpdateUom = async () => {
-    const res = await invoke("convert_distance", {
+  let handleUomSelection = ()=>{
+
+    if (uomSelection.text == "Distance"){
+      units = distances 
+      leftSelection = distances[0].text
+      rightSelection = distances[1].text
+      return
+    }
+    if (uomSelection.text == "Volume"){
+      leftSelection = volumes[0].text
+      rightSelection = volumes[1].text
+      units = volumes
+      return
+    }
+
+
+  }
+
+
+
+
+
+  let handleDistanceRefresh = async () => {
+
+    let fun =  uomSelection.text == "Distance" ? "convert_distance" : "convert_volume"
+
+
+    const res = await invoke(fun, {
       num: left,
       fromUom: leftSelection.text,
       toUom: rightSelection.text,
@@ -68,8 +94,8 @@
   let handleLeftUnit = async (e) => {
     let entry = e.target.value;
     left = entry;
-
-    const res = await invoke("convert_distance", {
+    let fun =  uomSelection.text == "Distance" ? "convert_distance" : "convert_volume"
+    const res = await invoke(fun, {
       num: left,
       fromUom: leftSelection.text,
       toUom: rightSelection.text,
@@ -83,7 +109,14 @@
 
 <main class="container">
   <h1>Unit Conversion Calculator</h1>
-
+  <select class="drop-down" bind:value={uomSelection}
+  on:change={handleUomSelection}>
+    {#each measurements as measurement}
+      <option class="drop-down" value={measurement}>
+        {measurement.text}
+      </option>
+    {/each}
+  </select>
   <div class="convert-screen">
     <div class="header-wrapper">
       <div class="section">
@@ -91,18 +124,19 @@
           type="text"
           class="in-val"
           value={left}
-          on:blur={handleLeftUnit}
+          on:input={handleLeftUnit}
         />
         <select
           class="drop-down"
+
           bind:value={leftSelection}
-          on:change={handleUpdateUom}
+          on:change={handleDistanceRefresh}
         >
-          {#each ditances as measurement}
-            <option class="drop-down" value={measurement}>
-              {measurement.text}
-            </option>
-          {/each}
+        {#each units as unit}
+        <option class="drop-down" value={unit}>
+          {unit.text}
+        </option>
+        {/each}
         </select>
       </div>
     </div>
@@ -117,17 +151,19 @@
           type="text"
           class="in-val"
           value={right}
-          on:blur={handleRightUnit}
+          on:input={handleRightUnit}
         />
 
         <select
           class="drop-down"
           bind:value={rightSelection}
-          on:change={handleUpdateUom}
+          on:change={handleDistanceRefresh}
         >
-          {#each ditances as measurement}
-            <option class="drop-down" value={measurement}>
-              {measurement.text}
+        
+          {#each units as unit}
+            <option class="drop-down" value={unit}
+            >
+              {unit.text}
             </option>
           {/each}
         </select>
@@ -137,11 +173,9 @@
 </main>
 
 <style>
-  
-  main{
+  main {
     margin-top: 25%;
   }
-
 
   .convert-screen {
     display: flex;
@@ -166,7 +200,6 @@
     font-weight: 400;
     width: 50%;
     margin-top: 1rem;
-
   }
   .in-val {
     color: #f6f6f6;
@@ -176,11 +209,9 @@
     line-height: 24px;
     font-weight: 400;
     width: 50%;
-
-
   }
-  
-  .header-wrapper{
+
+  .header-wrapper {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -188,16 +219,14 @@
     align-content: center;
   }
 
-  h3{
+  h3 {
     position: relative;
     top: 30%;
   }
 
-
-  input{
+  input {
     font-size: 2.5rem;
     padding-bottom: 1rem;
     text-align: center;
   }
-
 </style>
