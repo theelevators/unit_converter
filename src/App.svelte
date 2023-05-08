@@ -6,6 +6,12 @@
   let right = 0;
 
   let measurements = [
+    { id: 1, text: `Distance` },
+    { id: 2, text: `Volume` },
+  ];
+
+
+  let ditances = [
     { id: 1, text: `Inch` },
     { id: 2, text: `Milimeter` },
     { id: 3, text: `Centimeter` },
@@ -16,11 +22,27 @@
     { id: 8, text: `Mile` },
   ];
 
+  let volumes = [
+    { id: 1, text: `Gallon` },
+    { id: 2, text: `Quart` },
+    { id: 3, text: `Pint` },
+    { id: 4, text: `Cup` },
+    { id: 5, text: `Tablespoon` },
+    { id: 6, text: `Teaspoon` },
+    { id: 7, text: `Liter` },
+    { id: 8, text: `Milliliter` },
+    { id: 8, text: `Cubic Meter` },
+    { id: 8, text: `Cubic Foot` },
+    { id: 8, text: `Cubit Inch` },
+
+
+  ];
+
   let handleRightUnit = async (e) => {
     let entry = e.target.value;
     right = entry;
 
-    const res = await invoke("convert_unit", {
+    const res = await invoke("convert_distance", {
       num: right,
       fromUom: rightSelection.text,
       toUom: leftSelection.text,
@@ -32,7 +54,7 @@
   };
 
   let handleUpdateUom = async () => {
-    const res = await invoke("convert_unit", {
+    const res = await invoke("convert_distance", {
       num: left,
       fromUom: leftSelection.text,
       toUom: rightSelection.text,
@@ -47,7 +69,7 @@
     let entry = e.target.value;
     left = entry;
 
-    const res = await invoke("convert_unit", {
+    const res = await invoke("convert_distance", {
       num: left,
       fromUom: leftSelection.text,
       toUom: rightSelection.text,
@@ -76,7 +98,7 @@
           bind:value={leftSelection}
           on:change={handleUpdateUom}
         >
-          {#each measurements as measurement}
+          {#each ditances as measurement}
             <option class="drop-down" value={measurement}>
               {measurement.text}
             </option>
@@ -103,7 +125,7 @@
           bind:value={rightSelection}
           on:change={handleUpdateUom}
         >
-          {#each measurements as measurement}
+          {#each ditances as measurement}
             <option class="drop-down" value={measurement}>
               {measurement.text}
             </option>
