@@ -1,232 +1,111 @@
 <script>
-  import { invoke } from "@tauri-apps/api";
-  let uomSelection;
-  let leftSelection;
-  let rightSelection;
-  let left = 0;
-  let right = 0;
+  
+  let text;
+  import UnitConverter from "./lib/UnitConverter.svelte";
 
-  let measurements = [
-    { id: 1, text: `Distance` },
-    { id: 2, text: `Volume` },
-  ];
-
-  let distances = [
-    { id: 1, text: `Inch` },
-    { id: 2, text: `Milimeter` },
-    { id: 3, text: `Centimeter` },
-    { id: 4, text: `Meter` },
-    { id: 5, text: `Kilometer` },
-    { id: 6, text: `Foot` },
-    { id: 7, text: `Yard` },
-    { id: 8, text: `Mile` },
-  ];
-
-  let volumes = [
-    { id: 1, text: `Gallon` },
-    { id: 2, text: `Quart` },
-    { id: 3, text: `Pint` },
-    { id: 4, text: `Cup` },
-    { id: 5, text: `Tablespoon` },
-    { id: 6, text: `Teaspoon` },
-    { id: 7, text: `Liter` },
-    { id: 8, text: `Milliliter` },
-    { id: 8, text: `Cubic Meter` },
-    { id: 8, text: `Cubic Foot` },
-    { id: 8, text: `Cubic Inch` },
-  ];
-
-  let units = [...distances];
-
-  let handleRightUnit = async (e) => {
-    let entry = e.target.value;
-    right = entry;
-    let fun =  uomSelection.text == "Distance" ? "convert_distance" : "convert_volume"
-    const res = await invoke(fun, {
-      num: right,
-      fromUom: rightSelection.text,
-      toUom: leftSelection.text,
-    })
-      .then((e) => e)
-      .catch((err) => 0);
-
-    left = res;
+  let handleClick = async () => {
+    navigator.clipboard.readText().then((e) => (text = e));
   };
 
-  let handleUomSelection = ()=>{
-
-    if (uomSelection.text == "Distance"){
-      units = distances 
-      leftSelection = distances[0].text
-      rightSelection = distances[1].text
-      return
-    }
-    if (uomSelection.text == "Volume"){
-      leftSelection = volumes[0].text
-      rightSelection = volumes[1].text
-      units = volumes
-      return
-    }
-
-
-  }
-
-
-
-
-
-  let handleDistanceRefresh = async () => {
-
-    let fun =  uomSelection.text == "Distance" ? "convert_distance" : "convert_volume"
-
-
-    const res = await invoke(fun, {
-      num: left,
-      fromUom: leftSelection.text,
-      toUom: rightSelection.text,
-    })
-      .then((e) => e)
-      .catch((err) => 0);
-
-    right = res;
-  };
-
-  let handleLeftUnit = async (e) => {
-    let entry = e.target.value;
-    left = entry;
-    let fun =  uomSelection.text == "Distance" ? "convert_distance" : "convert_volume"
-    const res = await invoke(fun, {
-      num: left,
-      fromUom: leftSelection.text,
-      toUom: rightSelection.text,
-    })
-      .then((e) => e)
-      .catch((err) => err);
-
-    right = res;
-  };
+  let grid = [...Array(100)].map((e) => Array(27));
+  grid[0] = [..." abcdefghijklmnopqrstuvwxyz".split("")];
 </script>
 
-<main class="container">
-  <h1>Unit Conversion Calculator</h1>
-  <select class="drop-down" bind:value={uomSelection}
-  on:change={handleUomSelection}>
-    {#each measurements as measurement}
-      <option class="drop-down" value={measurement}>
-        {measurement.text}
-      </option>
-    {/each}
-  </select>
-  <div class="convert-screen">
-    <div class="header-wrapper">
-      <div class="section">
-        <input
-          type="text"
-          class="in-val"
-          value={left}
-          on:input={handleLeftUnit}
-        />
-        <select
-          class="drop-down"
+<div class="grid">
+  {#each grid as row, ridx}
+    <div class="row">
+      {#each row as col, cidx}
+        {#if ridx === 0 && cidx == 0}
+          <div id="row-{ridx} col-{cidx}" class="zero-zero">
+            {col}
+          </div>
+        {/if}
+        {#if ridx === 0 && cidx >= 1}
+          <div id="row-{ridx} col-{cidx}" class="col-indicator">
+            <p>
+              
+              {col.toUpperCase()}
+            </p>
+          </div>
+        {/if}
+        {#if cidx === 0 && ridx >= 1}
+          <div id="row-{ridx} col-{cidx}" class="row-indicator">{ridx}</div>
+        {/if}
 
-          bind:value={leftSelection}
-          on:change={handleDistanceRefresh}
-        >
-        {#each units as unit}
-        <option class="drop-down" value={unit}>
-          {unit.text}
-        </option>
-        {/each}
-        </select>
-      </div>
+        {#if ridx >= 1 && cidx >= 1}
+          <div id="row-{ridx} col-{cidx}" class="cell">
+            <input type="text" bind:value={col} />
+          </div>
+        {/if}
+      {/each}
     </div>
-    <div class="header-wrapper">
-      <div class="section">
-        <h3>=</h3>
-      </div>
-    </div>
-    <div class="header-wrapper">
-      <div class="section">
-        <input
-          type="text"
-          class="in-val"
-          value={right}
-          on:input={handleRightUnit}
-        />
-
-        <select
-          class="drop-down"
-          bind:value={rightSelection}
-          on:change={handleDistanceRefresh}
-        >
-        
-          {#each units as unit}
-            <option class="drop-down" value={unit}
-            >
-              {unit.text}
-            </option>
-          {/each}
-        </select>
-      </div>
-    </div>
-  </div>
-</main>
+  {/each}
+</div>
 
 <style>
-  main {
-    margin-top: 25%;
+  .grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
-  .convert-screen {
+  .row {
     display: flex;
-    justify-content: space-around;
-    height: 100%;
-  }
-  .section {
-    display: flex;
+    justify-content: space-between;
     width: 100%;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
+    min-height: 0.8rem;
   }
-  .drop-down {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
-    border: none;
-    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 400;
-    width: 50%;
-    margin-top: 1rem;
+  .zero-zero {
+    min-width: 16px;
+  
   }
-  .in-val {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
-    border: none;
-    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 24px;
-    font-weight: 400;
-    width: 50%;
-  }
-
-  .header-wrapper {
+  p{
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    align-items: center;
     justify-content: center;
-    align-content: center;
+    height: 1.3rem;
+    width: 100%;
+    background-color: #8294c4;
+    padding: 0px;
+    margin: 0;
   }
 
-  h3 {
-    position: relative;
-    top: 30%;
-  }
-
-  input {
-    font-size: 2.5rem;
-    padding-bottom: 1rem;
+  .col-indicator {
+    display: flex;
+    color: white;
+    background-color: #8294c4;
+    min-width: 70px;
+    width: 100px;
+    padding: 0px;
+    margin: 0.0315rem;
+    border: none;
+    box-shadow: 0.01rem 0px 0px white;
+    font-size: 0.8rem;
+    align-items: center;
+    justify-content: center;
     text-align: center;
   }
+  .row-indicator {
+    min-width: 16px;
+    font-size: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .cell {
+    background-color: white;
+    min-width: 70px;
+    color: black;
+    padding: 0px;
+    margin: 0.0315rem;
+    border: none;
+    box-shadow: 0.01rem 0px 0px gray;
+    font-size: 12px;
+  }
+  input {
+    all: unset;
+    padding: 1px;
+    width: 100%;
+  }
+
 </style>
