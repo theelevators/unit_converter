@@ -25,99 +25,99 @@ impl Distance {
     }
 
     pub fn to_inch<'a>(self) -> f32 {
-        match self {
-            Distance::Inch(value) => value.clone(),
-            Distance::Milimeter(value) => value.clone() / 25.4,
-            Distance::Centimeter(value) => value.clone() / 2.54,
-            Distance::Meter(value) => value.clone() * 39.37,
-            Distance::Kilometer(value) => value.clone() * 39370.0,
-            Distance::Foot(value) => value.clone() * 12.0,
-            Distance::Yard(value) => value.clone() * 36.0,
-            Distance::Mile(value) => value.clone() * 63360.0,
+        match &self {
+            Distance::Inch(value) => value.to_owned(),
+            Distance::Milimeter(value) => value / 25.4,
+            Distance::Centimeter(value) => value / 2.54,
+            Distance::Meter(value) => value * 39.37,
+            Distance::Kilometer(value) => value * 39370.0,
+            Distance::Foot(value) => value * 12.0,
+            Distance::Yard(value) => value * 36.0,
+            Distance::Mile(value) => value * 63360.0,
         }
     }
     pub fn to_milimeter<'a>(self) -> f32 {
-        match self {
-            Distance::Inch(value) => value.clone() * 25.4,
-            Distance::Milimeter(value) => value.clone(),
-            Distance::Centimeter(value) => value.clone() * 10.0,
-            Distance::Meter(value) => value.clone() * 1000.0,
-            Distance::Kilometer(value) => value.clone() * 1e6,
-            Distance::Foot(value) => value.clone() * 304.8,
-            Distance::Yard(value) => value.clone() * 914.4,
-            Distance::Mile(value) => value.clone() * 1.609e6,
+        match &self {
+            Distance::Inch(value) => value * 25.4,
+            Distance::Milimeter(value) => value.to_owned(),
+            Distance::Centimeter(value) => value * 10.0,
+            Distance::Meter(value) => value * 1000.0,
+            Distance::Kilometer(value) => value * 1e6,
+            Distance::Foot(value) => value * 304.8,
+            Distance::Yard(value) => value * 914.4,
+            Distance::Mile(value) => value * 1.609e6,
         }
     }
     pub fn to_centimeter<'a>(self) -> f32 {
-        match self {
-            Distance::Inch(value) => value.clone() * 2.54,
-            Distance::Milimeter(value) => value.clone() / 10.0,
-            Distance::Centimeter(value) => value.clone(),
-            Distance::Meter(value) => value.clone() * 100.0,
-            Distance::Kilometer(value) => value.clone() * 100000.0,
-            Distance::Foot(value) => value.clone() * 30.48,
-            Distance::Yard(value) => value.clone() * 91.44,
-            Distance::Mile(value) => value.clone() * 160900.0,
+        match &self {
+            Distance::Inch(value) => value * 2.54,
+            Distance::Milimeter(value) => value / 10.0,
+            Distance::Centimeter(value) => value.to_owned(),
+            Distance::Meter(value) => value * 100.0,
+            Distance::Kilometer(value) => value * 100000.0,
+            Distance::Foot(value) => value * 30.48,
+            Distance::Yard(value) => value * 91.44,
+            Distance::Mile(value) => value * 160900.0,
         }
     }
     pub fn to_meter<'a>(self) -> f32 {
-        match self {
-            Distance::Inch(value) => value.clone() / 39.37,
-            Distance::Milimeter(value) => value.clone() / 1000.0,
-            Distance::Centimeter(value) => value.clone() / 100.0,
-            Distance::Meter(value) => value.clone(),
-            Distance::Kilometer(value) => value.clone() * 1000.0,
-            Distance::Foot(value) => value.clone() / 3.281,
-            Distance::Yard(value) => value.clone() / 1.094,
-            Distance::Mile(value) => value.clone() * 1609.0,
+        match &self {
+            Distance::Inch(value) => value / 39.37,
+            Distance::Milimeter(value) => value / 1000.0,
+            Distance::Centimeter(value) => value / 100.0,
+            Distance::Meter(value) => value.to_owned(),
+            Distance::Kilometer(value) => value * 1000.0,
+            Distance::Foot(value) => value / 3.281,
+            Distance::Yard(value) => value / 1.094,
+            Distance::Mile(value) => value * 1609.0,
         }
     }
     pub fn to_kilometer<'a>(self) -> f32 {
-        match self {
-            Distance::Inch(value) => value.clone() / 39370.0,
-            Distance::Milimeter(value) => value.clone() / 1e6,
-            Distance::Centimeter(value) => value.clone() / 100000.0,
-            Distance::Meter(value) => value.clone() / 1000.0,
-            Distance::Kilometer(value) => value.clone(),
-            Distance::Foot(value) => value.clone() / 3281.0,
-            Distance::Yard(value) => value.clone() / 1094.0,
-            Distance::Mile(value) => value.clone() * 1.609,
+        match &self {
+            Distance::Inch(value) => value / 39370.0,
+            Distance::Milimeter(value) => value / 1e6,
+            Distance::Centimeter(value) => value / 100000.0,
+            Distance::Meter(value) => value / 1000.0,
+            Distance::Kilometer(value) => value.to_owned(),
+            Distance::Foot(value) => value / 3281.0,
+            Distance::Yard(value) => value / 1094.0,
+            Distance::Mile(value) => value * 1.609,
         }
     }
     pub fn to_foot<'a>(self) -> f32 {
-        match self {
-            Distance::Inch(value) => value.clone() / 12.0,
-            Distance::Milimeter(value) => value.clone() / 304.8,
-            Distance::Centimeter(value) => value.clone() / 30.48,
-            Distance::Meter(value) => value.clone() * 3.281,
-            Distance::Kilometer(value) => value.clone() * 3281.0,
-            Distance::Foot(value) => value.clone(),
-            Distance::Yard(value) => value.clone() * 3.0,
-            Distance::Mile(value) => value.clone() * 5280.0,
+        match &self {
+            Distance::Inch(value) => value / 12.0,
+            Distance::Milimeter(value) => value / 304.8,
+            Distance::Centimeter(value) => value / 30.48,
+            Distance::Meter(value) => value * 3.281,
+            Distance::Kilometer(value) => value * 3281.0,
+            Distance::Foot(value) => value.to_owned(),
+            Distance::Yard(value) => value * 3.0,
+            Distance::Mile(value) => value * 5280.0,
         }
     }
     pub fn to_yard<'a>(self) -> f32 {
-        match self {
-            Distance::Inch(value) => value.clone() / 36.0,
-            Distance::Milimeter(value) => value.clone() / 914.4,
-            Distance::Centimeter(value) => value.clone() / 91.44,
-            Distance::Meter(value) => value.clone() * 1.094,
-            Distance::Kilometer(value) => value.clone() * 1094.0,
-            Distance::Foot(value) => value.clone() / 3.0,
-            Distance::Yard(value) => value.clone(),
-            Distance::Mile(value) => value.clone() * 1760.0,
+        match &self {
+            Distance::Inch(value) => value / 36.0,
+            Distance::Milimeter(value) => value / 914.4,
+            Distance::Centimeter(value) => value / 91.44,
+            Distance::Meter(value) => value * 1.094,
+            Distance::Kilometer(value) => value * 1094.0,
+            Distance::Foot(value) => value / 3.0,
+            Distance::Yard(value) => value.to_owned(),
+            Distance::Mile(value) => value * 1760.0,
         }
     }
     pub fn to_mile<'a>(self) -> f32 {
-        match self {
-            Distance::Inch(value) => value.clone() / 63360.0,
-            Distance::Milimeter(value) => value.clone() / 1.609e6,
-            Distance::Centimeter(value) => value.clone() / 160900.0,
-            Distance::Meter(value) => value.clone() / 1609.0,
-            Distance::Kilometer(value) => value.clone() / 1.609,
-            Distance::Foot(value) => value.clone() / 5280.0,
-            Distance::Yard(value) => value.clone() / 1760.0,
-            Distance::Mile(value) => value.clone(),
+        match &self {
+            Distance::Inch(value) => value / 63360.0,
+            Distance::Milimeter(value) => value / 1.609e6,
+            Distance::Centimeter(value) => value / 160900.0,
+            Distance::Meter(value) => value / 1609.0,
+            Distance::Kilometer(value) => value / 1.609,
+            Distance::Foot(value) => value / 5280.0,
+            Distance::Yard(value) => value / 1760.0,
+            Distance::Mile(value) => value.to_owned(),
         }
     }
 
@@ -171,206 +171,206 @@ impl Volume {
         }
     }
     pub fn to_gallon<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone(),
-            Volume::Quart(value) => value.clone() / 4.0,
-            Volume::Pint(value) => value.clone() / 8.0,
-            Volume::Cup(value) => value.clone() / 15.772,
-            Volume::Ounce(value) => value.clone() / 128.0,
-            Volume::Tablespoon(value) => value.clone() / 256.0,
-            Volume::Teaspoon(value) => value.clone() / 768.0,
-            Volume::Liter(value) => value.clone() / 3.785,
-            Volume::Milliliter(value) => value.clone() / 3785.0,
-            Volume::CubicMeter(value) => value.clone() / 264.2,
-            Volume::CubicFoot(value) => value.clone() / 7.481,
-            Volume::CubitInch(value) => value.clone() / 231.0,
+        match &self {
+            Volume::Gallon(value) => value.to_owned(),
+            Volume::Quart(value) => value / 4.0,
+            Volume::Pint(value) => value / 8.0,
+            Volume::Cup(value) => value / 15.772,
+            Volume::Ounce(value) => value / 128.0,
+            Volume::Tablespoon(value) => value / 256.0,
+            Volume::Teaspoon(value) => value / 768.0,
+            Volume::Liter(value) => value / 3.785,
+            Volume::Milliliter(value) => value / 3785.0,
+            Volume::CubicMeter(value) => value / 264.2,
+            Volume::CubicFoot(value) => value / 7.481,
+            Volume::CubitInch(value) => value / 231.0,
 
         }
     }    
     pub fn to_quart<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() * 4.0,
-            Volume::Quart(value) => value.clone(),
-            Volume::Pint(value) => value.clone() / 2.0,
-            Volume::Cup(value) => value.clone() / 3.943,
-            Volume::Ounce(value) => value.clone() / 32.0,
-            Volume::Tablespoon(value) => value.clone() / 64.0,
-            Volume::Teaspoon(value) => value.clone() / 192.0,
-            Volume::Liter(value) => value.clone() * 1.057,
-            Volume::Milliliter(value) => value.clone() / 946.4,
-            Volume::CubicMeter(value) => value.clone() * 1057.0,
-            Volume::CubicFoot(value) => value.clone() * 29.922,
-            Volume::CubitInch(value) => value.clone() / 57.75,
+        match &self {
+            Volume::Gallon(value) => value * 4.0,
+            Volume::Quart(value) => value.to_owned(),
+            Volume::Pint(value) => value / 2.0,
+            Volume::Cup(value) => value / 3.943,
+            Volume::Ounce(value) => value / 32.0,
+            Volume::Tablespoon(value) => value / 64.0,
+            Volume::Teaspoon(value) => value / 192.0,
+            Volume::Liter(value) => value * 1.057,
+            Volume::Milliliter(value) => value / 946.4,
+            Volume::CubicMeter(value) => value * 1057.0,
+            Volume::CubicFoot(value) => value * 29.922,
+            Volume::CubitInch(value) => value / 57.75,
 
         }
     }   
     pub fn to_pint<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() * 8.0,
-            Volume::Quart(value) => value.clone()* 2.0,
-            Volume::Pint(value) => value.clone(),
-            Volume::Cup(value) => value.clone() / 1.972,
-            Volume::Ounce(value) => value.clone() / 16.0,
-            Volume::Tablespoon(value) => value.clone() / 32.0,
-            Volume::Teaspoon(value) => value.clone() / 96.0,
-            Volume::Liter(value) => value.clone() * 2.113,
-            Volume::Milliliter(value) => value.clone() / 473.2,
-            Volume::CubicMeter(value) => value.clone() * 2113.0,
-            Volume::CubicFoot(value) => value.clone() * 59.844,
-            Volume::CubitInch(value) => value.clone() / 28.875,
+        match &self {
+            Volume::Gallon(value) => value * 8.0,
+            Volume::Quart(value) => value* 2.0,
+            Volume::Pint(value) => value.to_owned(),
+            Volume::Cup(value) => value / 1.972,
+            Volume::Ounce(value) => value / 16.0,
+            Volume::Tablespoon(value) => value / 32.0,
+            Volume::Teaspoon(value) => value / 96.0,
+            Volume::Liter(value) => value * 2.113,
+            Volume::Milliliter(value) => value / 473.2,
+            Volume::CubicMeter(value) => value * 2113.0,
+            Volume::CubicFoot(value) => value * 59.844,
+            Volume::CubitInch(value) => value / 28.875,
 
         }
     }
     pub fn to_cup<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() * 15.773,
-            Volume::Quart(value) => value.clone()* 3.943,
-            Volume::Pint(value) => value.clone()* 1.972,
-            Volume::Cup(value) => value.clone() ,
-            Volume::Ounce(value) => value.clone() / 8.115,
-            Volume::Tablespoon(value) => value.clone() / 16.231,
-            Volume::Teaspoon(value) => value.clone() / 48.692,
-            Volume::Liter(value) => value.clone() * 4.167,
-            Volume::Milliliter(value) => value.clone() / 240.0,
-            Volume::CubicMeter(value) => value.clone() * 4167.0,
-            Volume::CubicFoot(value) => value.clone() * 118.0,
-            Volume::CubitInch(value) => value.clone() / 14.646,
+        match &self {
+            Volume::Gallon(value) => value * 15.773,
+            Volume::Quart(value) => value* 3.943,
+            Volume::Pint(value) => value* 1.972,
+            Volume::Cup(value) => value.to_owned(),
+            Volume::Ounce(value) => value / 8.115,
+            Volume::Tablespoon(value) => value / 16.231,
+            Volume::Teaspoon(value) => value / 48.692,
+            Volume::Liter(value) => value * 4.167,
+            Volume::Milliliter(value) => value / 240.0,
+            Volume::CubicMeter(value) => value * 4167.0,
+            Volume::CubicFoot(value) => value * 118.0,
+            Volume::CubitInch(value) => value / 14.646,
 
         }
     }
     pub fn to_ounce<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() * 128.0,
-            Volume::Quart(value) => value.clone()* 32.0,
-            Volume::Pint(value) => value.clone()* 16.0,
-            Volume::Cup(value) => value.clone() * 8.115,
-            Volume::Ounce(value) => value.clone(),
-            Volume::Tablespoon(value) => value.clone() / 2.0,
-            Volume::Teaspoon(value) => value.clone() / 6.0,
-            Volume::Liter(value) => value.clone() * 33.81,
-            Volume::Milliliter(value) => value.clone() / 29.574,
-            Volume::CubicMeter(value) => value.clone() * 33810.0,
-            Volume::CubicFoot(value) => value.clone() * 957.5,
-            Volume::CubitInch(value) => value.clone() / 1.805,
+        match &self {
+            Volume::Gallon(value) => value * 128.0,
+            Volume::Quart(value) => value* 32.0,
+            Volume::Pint(value) => value* 16.0,
+            Volume::Cup(value) => value * 8.115,
+            Volume::Ounce(value) => value.to_owned(),
+            Volume::Tablespoon(value) => value / 2.0,
+            Volume::Teaspoon(value) => value / 6.0,
+            Volume::Liter(value) => value * 33.81,
+            Volume::Milliliter(value) => value / 29.574,
+            Volume::CubicMeter(value) => value * 33810.0,
+            Volume::CubicFoot(value) => value * 957.5,
+            Volume::CubitInch(value) => value / 1.805,
 
         }
     }
     pub fn to_tablespoon<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() * 256.0,
-            Volume::Quart(value) => value.clone()* 64.0,
-            Volume::Pint(value) => value.clone()* 32.0,
-            Volume::Cup(value) => value.clone() * 16.231,
-            Volume::Ounce(value) => value.clone() * 2.0,
-            Volume::Tablespoon(value) => value.clone() ,
-            Volume::Teaspoon(value) => value.clone() / 3.0,
-            Volume::Liter(value) => value.clone() * 67.628,
-            Volume::Milliliter(value) => value.clone() / 14.787,
-            Volume::CubicMeter(value) => value.clone() * 67630.0,
-            Volume::CubicFoot(value) => value.clone() * 1915.0,
-            Volume::CubitInch(value) => value.clone() * 1.108,
+        match &self {
+            Volume::Gallon(value) => value * 256.0,
+            Volume::Quart(value) => value* 64.0,
+            Volume::Pint(value) => value* 32.0,
+            Volume::Cup(value) => value * 16.231,
+            Volume::Ounce(value) => value * 2.0,
+            Volume::Tablespoon(value) => value.to_owned(),
+            Volume::Teaspoon(value) => value / 3.0,
+            Volume::Liter(value) => value * 67.628,
+            Volume::Milliliter(value) => value / 14.787,
+            Volume::CubicMeter(value) => value * 67630.0,
+            Volume::CubicFoot(value) => value * 1915.0,
+            Volume::CubitInch(value) => value * 1.108,
 
         }
     }
     pub fn to_teaspoon<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() * 768.0,
-            Volume::Quart(value) => value.clone()* 192.0,
-            Volume::Pint(value) => value.clone()* 96.0,
-            Volume::Cup(value) => value.clone() * 48.692,
-            Volume::Ounce(value) => value.clone() * 6.0,
-            Volume::Tablespoon(value) => value.clone() *3.0,
-            Volume::Teaspoon(value) => value.clone() ,
-            Volume::Liter(value) => value.clone() * 202.9,
-            Volume::Milliliter(value) => value.clone() / 4.929,
-            Volume::CubicMeter(value) => value.clone() * 202900.0,
-            Volume::CubicFoot(value) => value.clone() * 5745.0,
-            Volume::CubitInch(value) => value.clone() * 3.325,
+        match &self {
+            Volume::Gallon(value) => value * 768.0,
+            Volume::Quart(value) => value* 192.0,
+            Volume::Pint(value) => value* 96.0,
+            Volume::Cup(value) => value * 48.692,
+            Volume::Ounce(value) => value * 6.0,
+            Volume::Tablespoon(value) => value *3.0,
+            Volume::Teaspoon(value) => value.to_owned(),
+            Volume::Liter(value) => value * 202.9,
+            Volume::Milliliter(value) => value / 4.929,
+            Volume::CubicMeter(value) => value * 202900.0,
+            Volume::CubicFoot(value) => value * 5745.0,
+            Volume::CubitInch(value) => value * 3.325,
 
         }
     }
     pub fn to_liter<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() / 3.785,
-            Volume::Quart(value) => value.clone()* 1.057,
-            Volume::Pint(value) => value.clone()/ 2.113,
-            Volume::Cup(value) => value.clone() / 4.167,
-            Volume::Ounce(value) => value.clone() / 33.814,
-            Volume::Tablespoon(value) => value.clone() / 67.628,
-            Volume::Teaspoon(value) => value.clone() / 202.9 ,
-            Volume::Liter(value) => value.clone(),
-            Volume::Milliliter(value) => value.clone() / 1000.0,
-            Volume::CubicMeter(value) => value.clone() * 1000.0,
-            Volume::CubicFoot(value) => value.clone() * 28.317,
-            Volume::CubitInch(value) => value.clone() / 61.024,
+        match &self {
+            Volume::Gallon(value) => value / 3.785,
+            Volume::Quart(value) => value* 1.057,
+            Volume::Pint(value) => value/ 2.113,
+            Volume::Cup(value) => value / 4.167,
+            Volume::Ounce(value) => value / 33.814,
+            Volume::Tablespoon(value) => value / 67.628,
+            Volume::Teaspoon(value) => value / 202.9 ,
+            Volume::Liter(value) => value.to_owned(),
+            Volume::Milliliter(value) => value / 1000.0,
+            Volume::CubicMeter(value) => value * 1000.0,
+            Volume::CubicFoot(value) => value * 28.317,
+            Volume::CubitInch(value) => value / 61.024,
 
         }
     }
     pub fn to_milliliter<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() * 3785.0,
-            Volume::Quart(value) => value.clone() * 946.4,
-            Volume::Pint(value) => value.clone() * 473.2,
-            Volume::Cup(value) => value.clone() * 240.0,
-            Volume::Ounce(value) => value.clone() * 29.574,
-            Volume::Tablespoon(value) => value.clone() * 14.787,
-            Volume::Teaspoon(value) => value.clone() * 4.929 ,
-            Volume::Liter(value) => value.clone() * 1000.0,
-            Volume::Milliliter(value) => value.clone(),
-            Volume::CubicMeter(value) => value.clone() * 1e+6,
-            Volume::CubicFoot(value) => value.clone() * 28320.0,
-            Volume::CubitInch(value) => value.clone() * 16.387,
+        match &self {
+            Volume::Gallon(value) => value * 3785.0,
+            Volume::Quart(value) => value * 946.4,
+            Volume::Pint(value) => value * 473.2,
+            Volume::Cup(value) => value * 240.0,
+            Volume::Ounce(value) => value * 29.574,
+            Volume::Tablespoon(value) => value * 14.787,
+            Volume::Teaspoon(value) => value * 4.929 ,
+            Volume::Liter(value) => value * 1000.0,
+            Volume::Milliliter(value) => value.to_owned(),
+            Volume::CubicMeter(value) => value * 1e+6,
+            Volume::CubicFoot(value) => value * 28320.0,
+            Volume::CubitInch(value) => value * 16.387,
 
         }
     }
     pub fn to_cubic_meter<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() / 264.2,
-            Volume::Quart(value) => value.clone() / 1057.0,
-            Volume::Pint(value) => value.clone() / 2113.0,
-            Volume::Cup(value) => value.clone() / 4167.0,
-            Volume::Ounce(value) => value.clone() / 33810.0,
-            Volume::Tablespoon(value) => value.clone() / 67630.0,
-            Volume::Teaspoon(value) => value.clone() / 202900.0 ,
-            Volume::Liter(value) => value.clone() / 1000.0,
-            Volume::Milliliter(value) => value.clone() / 1e+6,
-            Volume::CubicMeter(value) => value.clone(),
-            Volume::CubicFoot(value) => value.clone() / 35.315,
-            Volume::CubitInch(value) => value.clone() / 61020.0,
+        match &self {
+            Volume::Gallon(value) => value / 264.2,
+            Volume::Quart(value) => value / 1057.0,
+            Volume::Pint(value) => value / 2113.0,
+            Volume::Cup(value) => value / 4167.0,
+            Volume::Ounce(value) => value / 33810.0,
+            Volume::Tablespoon(value) => value / 67630.0,
+            Volume::Teaspoon(value) => value / 202900.0 ,
+            Volume::Liter(value) => value / 1000.0,
+            Volume::Milliliter(value) => value / 1e+6,
+            Volume::CubicMeter(value) => value.to_owned(),
+            Volume::CubicFoot(value) => value / 35.315,
+            Volume::CubitInch(value) => value / 61020.0,
 
         }
     }
     pub fn to_cubic_foot<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() / 7.48,
-            Volume::Quart(value) => value.clone() / 29.922,
-            Volume::Pint(value) => value.clone() / 59.844,
-            Volume::Cup(value) => value.clone() / 118.0,
-            Volume::Ounce(value) => value.clone() / 957.5,
-            Volume::Tablespoon(value) => value.clone() / 1915.0,
-            Volume::Teaspoon(value) => value.clone() / 5745.0 ,
-            Volume::Liter(value) => value.clone() / 28.317,
-            Volume::Milliliter(value) => value.clone() / 28320.0,
-            Volume::CubicMeter(value) => value.clone() * 35.315,
-            Volume::CubicFoot(value) => value.clone() ,
-            Volume::CubitInch(value) => value.clone() / 1728.0,
+        match &self {
+            Volume::Gallon(value) => value / 7.48,
+            Volume::Quart(value) => value / 29.922,
+            Volume::Pint(value) => value / 59.844,
+            Volume::Cup(value) => value / 118.0,
+            Volume::Ounce(value) => value / 957.5,
+            Volume::Tablespoon(value) => value / 1915.0,
+            Volume::Teaspoon(value) => value / 5745.0 ,
+            Volume::Liter(value) => value / 28.317,
+            Volume::Milliliter(value) => value / 28320.0,
+            Volume::CubicMeter(value) => value * 35.315,
+            Volume::CubicFoot(value) => value.to_owned(),
+            Volume::CubitInch(value) => value / 1728.0,
 
         }
     }
     pub fn to_cubic_inch<'a>(self) -> f32 {
-        match self {
-            Volume::Gallon(value) => value.clone() * 231.0,
-            Volume::Quart(value) => value.clone() * 57.75,
-            Volume::Pint(value) => value.clone() * 28.875,
-            Volume::Cup(value) => value.clone() * 14.646,
-            Volume::Ounce(value) => value.clone() * 1.805,
-            Volume::Tablespoon(value) => value.clone() / 1.108,
-            Volume::Teaspoon(value) => value.clone() / 3.325 ,
-            Volume::Liter(value) => value.clone() * 61.024,
-            Volume::Milliliter(value) => value.clone() / 16.387,
-            Volume::CubicMeter(value) => value.clone() * 61020.0,
-            Volume::CubicFoot(value) => value.clone() * 1728.0,
-            Volume::CubitInch(value) => value.clone() ,
+        match &self {
+            Volume::Gallon(value) => value * 231.0,
+            Volume::Quart(value) => value * 57.75,
+            Volume::Pint(value) => value * 28.875,
+            Volume::Cup(value) => value * 14.646,
+            Volume::Ounce(value) => value * 1.805,
+            Volume::Tablespoon(value) => value / 1.108,
+            Volume::Teaspoon(value) => value / 3.325 ,
+            Volume::Liter(value) => value * 61.024,
+            Volume::Milliliter(value) => value / 16.387,
+            Volume::CubicMeter(value) => value * 61020.0,
+            Volume::CubicFoot(value) => value * 1728.0,
+            Volume::CubitInch(value) => value.to_owned(),
 
         }
     }
@@ -383,6 +383,7 @@ impl Volume {
             "ounce" => Ok(self.to_ounce()),
             "tablespoon" => Ok(self.to_tablespoon()),
             "teaspoon" => Ok(self.to_teaspoon()),
+            "liter" => Ok(self.to_liter()),
             "milliliter" => Ok(self.to_milliliter()),
             "cubic meter" => Ok(self.to_cubic_meter()),
             "cubic foot" => Ok(self.to_cubic_foot()),

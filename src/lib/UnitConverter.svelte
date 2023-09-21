@@ -31,9 +31,9 @@
       { id: 6, text: `Teaspoon` },
       { id: 7, text: `Liter` },
       { id: 8, text: `Milliliter` },
-      { id: 8, text: `Cubic Meter` },
-      { id: 8, text: `Cubic Foot` },
-      { id: 8, text: `Cubic Inch` },
+      { id: 9, text: `Cubic Meter` },
+      { id: 10, text: `Cubic Foot` },
+      { id: 11, text: `Cubic Inch` },
     ];
   
     let units = [...distances];
@@ -62,9 +62,9 @@
         return
       }
       if (uomSelection.text == "Volume"){
+        units = volumes
         leftSelection = volumes[0].text
         rightSelection = volumes[1].text
-        units = volumes
         return
       }
   

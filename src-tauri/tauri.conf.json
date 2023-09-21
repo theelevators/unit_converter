@@ -40,7 +40,7 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "elevated_pies",
+        "title": "Unit Converter",
         "width": 800,
         "height": 600
       }
